@@ -74,5 +74,106 @@ class SqlController extends Controller{
 
     }
 
+    /*
+     * 三．快捷查询
+     * 快捷查询方式是一种多字段查询的简化写法，在多个字段之间用'|'隔开表示OR，用'&'隔开表示AND。
+     */
+    public function quick(){
+
+        $user = M('User');
+//        $map['user|email'] = '哪吒'; //'|'换成'&'变成AND;   //1.不同字段相同查询条件
+//        $map['id&user'] = array(1,'蜡笔小新','_multi'=>true);    //2.使用不同查询条件   PS：设置'_multi'为true，是为了让id 对应1，让user 对应'蜡笔小新'，否则就会出现id 对应了1 还要对应'蜡笔小新'的情况。而且，这设置要在放在数组最后。
+        $map['id&user'] = array(array('gt', 0),'蜡笔小新','_multi'=>true);    //3.支持使用表达式结合快捷查询
+        var_dump($user->where($map)->select());
+    }
+
+/*
+ * 四．区间查询
+ */
+public function interval(){
+        //区间查询
+    $user = M('User');
+//    $map['id'] = array(array('gt', 1), array('lt', 4));
+    $map['id'] = array(array('gt', 1), array('lt', 4), 'OR');  //第三个参数设置逻辑OR
+    var_dump($user->where($map)->select());
+}
+
+    /*
+     *五．组合查询
+     */
+    public function combination(){
+        //字符串查询(_string)
+/*        $user = M('User');
+        $map['id'] = array('eq', 1);
+        $map['_string'] ='user="蜡笔小新" AND email="xiaoxin@163.com"';
+        var_dump($user->where($map)->select());*/
+
+        //请求字符串查询(_query)
+/*        $user = M('User');
+        $map['id'] = array('eq', 1);
+        $map['_query'] ='user=蜡笔小新&email=xiaoxin@163.com&_logic=OR';
+        var_dump($user->where($map)->select());*/
+
+        //复合查询(_complex)
+        $user = M('User');
+        $where['user'] = array('like', '%小%');
+        $where['id'] = 1;
+        $where['_logic'] = 'OR';
+        $map['_complex'] = $where;
+        $map['id'] = 3;
+        $map['_logic'] = 'OR';
+        var_dump($user->where($map)->select());
+
+    }
+
+    /*
+     * 六．统计查询
+     */
+    public function count(){
+        //数据总条数
+        $user = M('User');
+        var_dump($user->count());
+
+        //字段总条数，遇到NULL不统计
+        var_dump($user->count('email'));
+
+        //最大值
+        var_dump($user->max('id'));
+
+        //最小值
+        var_dump($user->min('id'));
+
+        //平均值
+        var_dump($user->avg('id'));
+
+        //求总和
+        var_dump($user->sum('id'));
+    }
+
+    /*
+     * 七．动态查询
+     */
+    public function getby(){
+        //查找email=xiaoin@163.com的数据
+        $user = M('User');
+        var_dump($user->getByemail('xiaoxin@163.com'));
+
+        //通过user得到相对应id值
+        var_dump($user->getFieldByUser('哪吒', 'id'));
+    }
+
+    /*
+ * 八．SQL 查询
+ */
+    public function sql(){
+        //查询结果集，如果采用分布式读写分离，则始终在读服务器执行
+        $user = M('User');
+        var_dump($user->query('SELECT * FROM think_user'));
+
+        //更新和写入，如果采用分布式读写分离，则始终在写服务器执行
+        var_dump($user->execute('UPDATE think_user set user="蜡笔大新" WHERE id=1'));
+
+        var_dump($user->query('SELECT * FROM think_user'));
+    }
 
 }

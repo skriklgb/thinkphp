@@ -1494,3 +1494,13 @@ ERR: 1146:Table 'thinkphp.tp_abc' doesn't exist
 ERR: 1146:Table 'tp.think_user' doesn't exist
  [ SQL语句 ] : SHOW COLUMNS FROM `tp`.`think_user`
 
+[ 2016-07-31T17:09:46+08:00 ] ::1 /thinkphp/Home/Sql/condition
+ERR: 非法操作:condition
+
+[ 2016-07-31T17:27:17+08:00 ] ::1 /thinkphp/Home/Sql/map
+ERR: 表达式错误:ngt
+
+[ 2016-07-31T20:45:13+08:00 ] ::1 /thinkphp/Home/Sql/quick
+ERR: 1054:Unknown column 'eemail' in 'where clause'
+ [ SQL语句 ] : SELECT * FROM `think_user` WHERE ( `user` = 'a' OR `eemail` = 'a' ) 
+
