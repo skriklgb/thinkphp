@@ -29,9 +29,19 @@ class UserController extends Controller{
 //        $user= new Model('user');
 //        $user = new Model('user','think_','mysql://root:@localhost/thinkphp');   //当某些地方需要用到连接外部数据库的时候会用到这种方式
         //实例化Model类
-//        $user = M('user');    //此种方法不用导入use Think\Model;
+        $user = M('user');    //此种方法不用导入use Think\Model;
 //        var_dump($user->select());
-        $user = new UserModel();
-        var_dump($user->select());
+//        $user = new UserModel();
+//        var_dump($user->select());
+        //跨模块实例化
+//        $user = D('Admin/user');
+//        var_dump($user->select());
+
+//        //空M()方法,使用原生的SQL 语句进行操作数据库
+//        $user = M(); //或者new Model();空基类
+//        var_dump($user->query("SELECT * FROM think_user WHERE user='蜡笔小新'"));
+
+        //查看字段结构
+        var_dump($user->getDbFields());
     }
 }

@@ -20,5 +20,9 @@ class UserModel extends Model{
 
     //附加数据库名
 //    protected $dbName = 'tp';
-
+    public function __construct()
+    {
+        parent::__construct();
+        echo "home";
+    }
 }
