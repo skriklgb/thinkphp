@@ -20,6 +20,14 @@ define('APP_DEBUG',True);
 // 定义应用目录
 define('APP_PATH','./Cms/');
 
+/*//设定目录生成的文件
+define('DIR_SECURE_FILENAME', 'default.html');
+//设置目录页面内容
+define('DIR_SECURE_CONTENT', '目录禁止');
+//禁止目录主页生成
+define('BUILD_DIR_SECURE', false);*/
+
+
 // 引入ThinkPHP入口文件
 require './ThinkPHP/ThinkPHP.php';
 
