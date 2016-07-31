@@ -5,11 +5,13 @@
  * Date: 2016/7/31 9:04
  */
 namespace Home\Controller;
+use Home\Model\UserModel;
 use Think\Controller;
+//use Think\Model;
 
 class UserController extends Controller{
     public function index(){
-        echo "index";
+        echo "User模块index方法";
     }
     public function test($user,$pass){
         echo "user=".$user."pass=".$pass;
@@ -20,5 +22,16 @@ class UserController extends Controller{
         //或者           http://localhost/thinkphp/?m=Home&c=User&a=test&user=less&pass=123
 
         //去除了index.php    http://localhost/thinkphp/Home
+
+    }
+
+    public function  model(){
+//        $user= new Model('user');
+//        $user = new Model('user','think_','mysql://root:@localhost/thinkphp');   //当某些地方需要用到连接外部数据库的时候会用到这种方式
+        //实例化Model类
+//        $user = M('user');    //此种方法不用导入use Think\Model;
+//        var_dump($user->select());
+        $user = new UserModel();
+        var_dump($user->select());
     }
 }
