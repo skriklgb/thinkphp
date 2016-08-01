@@ -1,6 +1,6 @@
 <?php
 /**
- * 主要功能：
+ * 主要功能：06-07.ThinkPHP--SQL查询语句
  * @authors: SkrikLgb
  * Date: 2016/7/31 16:39
  */

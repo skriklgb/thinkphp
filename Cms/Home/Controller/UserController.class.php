@@ -1,6 +1,6 @@
 <?php
 /**
- * 主要功能：
+ * 主要功能：04-05.ThinkPHP--模型初步
  * @authors: SkrikLgb
  * Date: 2016/7/31 9:04
  */
